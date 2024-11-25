@@ -1,0 +1,86 @@
+const skillsData: string[] = [
+  // Programación y tecnologías
+  "JavaScript",
+  "React",
+  "Node.js",
+  "Python",
+  "Java",
+  "C++",
+  "SQL",
+  "MongoDB",
+  "AWS",
+  "Docker",
+  "Kubernetes",
+  "HTML",
+  "CSS",
+  "TypeScript",
+  "Angular",
+  "Vue.js",
+  "Ruby on Rails",
+  "PHP",
+  "Swift",
+  "C#",
+  "Go",
+  "Rust",
+  "MATLAB",
+  "R",
+  "Flutter",
+  "Unity",
+  "Unreal Engine",
+
+  // Diseño y creatividad
+  "Adobe Photoshop",
+  "Adobe Illustrator",
+  "Adobe Premiere Pro",
+  "Figma",
+  "Sketch",
+  "UX/UI Design",
+  "3D Modeling",
+  "Blender",
+  "AutoCAD",
+  "SolidWorks",
+
+  // Gestión y organización
+  "Gestión de proyectos",
+  "Scrum",
+  "Kanban",
+  "Agile",
+  "Planificación estratégica",
+  "Gestión del tiempo",
+  "Resolución de problemas",
+  "Análisis de datos",
+  "Trabajo en equipo",
+  "Liderazgo",
+
+  // Idiomas (véase lista separada)
+
+  // Comunicación y ventas
+  "Servicio al cliente",
+  "Ventas",
+  "Marketing digital",
+  "SEO",
+  "SEM",
+  "Publicidad",
+  "Copywriting",
+  "Gestión de redes sociales",
+
+  // Habilidades técnicas y especializadas
+  "Manejo de maquinaria",
+  "Electricidad",
+  "Soldadura",
+  "Cálculo estructural",
+  "Biotecnología",
+  "Farmacología",
+
+  // Otras habilidades generales
+  "Microsoft Excel",
+  "Microsoft Word",
+  "PowerPoint",
+  "Google Workspace",
+  "Resolución de conflictos",
+  "Pensamiento crítico",
+  "Atención al detalle",
+  "Adaptabilidad",
+  "Multitarea",
+];
+export default skillsData;

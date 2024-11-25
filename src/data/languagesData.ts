@@ -1,0 +1,23 @@
+const languagesData: string[] = [
+  "Inglés",
+  "Español",
+  "Francés",
+  "Alemán",
+  "Chino",
+  "Japonés",
+  "Árabe",
+  "Ruso",
+  "Portugués",
+  "Italiano",
+  "Coreano",
+  "Hindi",
+  "Sueco",
+  "Noruego",
+  "Danés",
+  "Finés",
+  "Holandés",
+  "Polaco",
+  "Griego",
+  "Turco",
+];
+export default languagesData;
