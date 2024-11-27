@@ -1,6 +1,5 @@
 "use client";
 
-import { revalidateAll } from "@/app/actions/auth";
 import ExtendableButton from "@/components/ExtendableButton";
 import Wrapper from "@/components/Wrapper";
 import { AuthField } from "@/components/auth/AuthField";
