@@ -1,5 +1,5 @@
 "use client";
-import type { Job } from "@/types/common";
+import type { Job, JobWithRelations } from "@/types/common";
 import RichTextEditor, {
 	BaseKit,
 	Bold,
@@ -15,7 +15,9 @@ import "reactjs-tiptap-editor/style.css";
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Separator } from "@/components/ui/separator";
+import type { Tables } from "@/types/supabase_public";
 import { ApplyButtonState } from "@/utils/enums";
+import { createClient } from "@/utils/supabase/client";
 import { cn, getSalaryString, handlePlural } from "@/utils/utils";
 import parse from "html-react-parser";
 import { ArrowDownCircle, ChevronDownCircle } from "lucide-react";
@@ -26,8 +28,8 @@ export default function JobDetails({
 	apply,
 	buttonState,
 }: {
-	job: Job | null;
-	apply: (job: Job) => void;
+	job: (Tables<"jobs"> & JobWithRelations) | null;
+	apply: (job: Tables<"jobs"> & JobWithRelations) => void;
 	buttonState: ApplyButtonState;
 }) {
 	const divRef = useRef<HTMLDivElement>(null);
@@ -98,7 +100,7 @@ export default function JobDetails({
 			<div className="flex flex-col px-4 sticky top-0 left-0 bg-card/95 backdrop-blur supports-[backdrop-filter]:bg-card/60  pt-4 pb-2 mb-6 border-b border-border/40 text-muted-foreground">
 				<div className="flex flex-row items-center justify-between">
 					<span>
-						{job.company} - {job.title}
+						{job.users.company_profiles.company_name} - {job.title}
 					</span>
 				</div>
 				<div className="flex flex-row items-center justify-between">
@@ -109,7 +111,7 @@ export default function JobDetails({
 			<div className="px-4">{parse(job.description)}</div>
 			<div className="w-full px-4 mt-6 mb-2 flex flex-row justify-between ">
 				<Button
-					onClick={() => {
+					onClick={async () => {
 						if (
 							buttonState === ApplyButtonState.DISABLED ||
 							buttonState === ApplyButtonState.APPLIED
@@ -136,8 +138,14 @@ export default function JobDetails({
 						{job.slots} {handlePlural(job.slots, "vacante", "vacantes")}
 					</span>
 					<span className="text-muted-foreground">
-						{job.requests.length ?? 0}{" "}
-						{handlePlural(job.requests.length ?? 0, "solicitud", "solicitudes")}
+						{/* {job.requests.length ?? 0}{" "}
+						{handlePlural(job.requests.length ?? 0, "solicitud", "solicitudes")} */}
+						{job.applications.length ?? 0}{" "}
+						{handlePlural(
+							job.applications.length ?? 0,
+							"solicitud",
+							"solicitudes",
+						)}
 					</span>
 				</div>
 			</div>

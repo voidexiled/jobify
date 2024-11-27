@@ -1,26 +1,47 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { PROFILE_TYPE, useUserStore } from "@/hooks/useUserStore";
+import { fetchUserById } from "@/queries/common/users";
+import { PROFILE_TYPE } from "@/utils/enums";
+import { createClient } from "@/utils/supabase/client";
+import { useSession } from "@supabase/auth-helpers-react";
+import { QueryClient, useQuery } from "@tanstack/react-query";
 import { ArrowLeft, LogOut } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 export default function Navbar() {
-	const pathname = usePathname();
+	const userAuth = useSession();
 	const router = useRouter();
-	const { user, logout } = useUserStore();
+	const supabase = createClient();
 
-	const handleLogout = () => {
-		logout();
-		router.push("/auth");
+	const { data: user, refetch: refetchUserProfile } = useQuery({
+		queryKey: ["user"],
+		// biome-ignore lint/style/noNonNullAssertion: <explanation>
+		queryFn: () => fetchUserById(userAuth?.user?.id!),
+		retry: true,
+		retryDelay: 100,
+	});
+
+	const handleLogout = async () => {
+		//logout();
+		const qc = new QueryClient();
+		qc.clear();
+		await supabase.auth.signOut().finally(() => {
+			router.push("/auth");
+		});
 	};
 
-	if (!user) {
-		return null;
-	}
+	// biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
+	useEffect(() => {
+		refetchUserProfile();
+	}, [userAuth]);
+
+	// if (!user) {
+	// 	return null;
+	// }
 
 	return (
 		<nav className="bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 sticky top-0 z-50 w-full border-b border-border/40">
@@ -47,10 +68,10 @@ export default function Navbar() {
 						</Link>
 					</div>
 					<div className="flex items-center space-x-4">
-						{user.profileType && (
+						{user?.profile_type && (
 							<Button variant="ghost" asChild>
 								<Link href="/feed">
-									{user.profileType === PROFILE_TYPE.EMPLOYEE
+									{user?.profile_type === PROFILE_TYPE.EMPLOYEE
 										? "Buscar trabajo"
 										: "Administrar ofertas de trabajo"}
 								</Link>

@@ -1,10 +1,6 @@
-import {
-  type CompanyProfile,
-  type EmployeeProfile,
-  PROFILE_TYPE,
-  type User,
-} from "@/hooks/useUserStore";
 import type { Job } from "@/types/common";
+import type { Tables } from "@/types/supabase_public";
+import { PROFILE_TYPE } from "@/utils/enums";
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
 
@@ -12,31 +8,32 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
+export function isEmployeeProfile(
+  profile: Tables<"employee_profiles"> | Tables<"company_profiles">
+): profile is Tables<"employee_profiles"> {
+  return profile !== null && "full_name" in profile && "skills" in profile;
+}
+export function isCompanyProfile(
+  profile: Tables<"employee_profiles"> | Tables<"company_profiles">
+): profile is Tables<"company_profiles"> {
+  return (
+    profile !== null && "company_name" in profile && "company_size" in profile
+  );
+}
+
 export function isEmployee(
-  user: User | null
-): user is User & { profile: EmployeeProfile } {
-  return user !== null && user.profileType === PROFILE_TYPE.EMPLOYEE;
+  user: Tables<"users"> | null
+): user is Tables<"users"> {
+  return user !== null && user.profile_type === PROFILE_TYPE.EMPLOYEE;
 }
 
 export function isCompany(
-  user: User | null
-): user is User & { profile: CompanyProfile } {
-  return user !== null && user.profileType === PROFILE_TYPE.COMPANY;
+  user: Tables<"users"> | null
+): user is Tables<"users"> {
+  return user !== null && user.profile_type === PROFILE_TYPE.COMPANY;
 }
 
-export function isEmployeeProfile(
-  profile: EmployeeProfile | CompanyProfile | null
-): profile is EmployeeProfile {
-  return profile !== null && "name" in profile && "skills" in profile;
-}
-
-export function isCompanyProfile(
-  profile: EmployeeProfile | CompanyProfile | null
-): profile is CompanyProfile {
-  return profile !== null && "companyName" in profile;
-}
-
-export const getSalaryString = (job: Job) => {
+export const getSalaryString = (job: Tables<"jobs">) => {
   const formatter = new Intl.NumberFormat("es-MX", {
     style: "currency",
     currencySign: "standard",
@@ -47,13 +44,13 @@ export const getSalaryString = (job: Job) => {
     return formatter.format(salary);
   };
 
-  if (!job.minSalary || !job.maxSalary) {
+  if (!job.min_salary || !job.max_salary) {
     return "$0";
   }
-  if (job.minSalary === job.maxSalary) {
-    return `${convertSalary(job.minSalary)}`;
+  if (job.min_salary === job.max_salary) {
+    return `${convertSalary(job.min_salary)}`;
   }
-  return `${convertSalary(job.minSalary)} - ${convertSalary(job.maxSalary)}`;
+  return `${convertSalary(job.min_salary)} - ${convertSalary(job.max_salary)}`;
 };
 
 export const handlePlural = (

@@ -44,6 +44,9 @@ importers:
       '@supabase-cache-helpers/postgrest-swr':
         specifier: ^1.10.5
         version: 1.10.5(@supabase/postgrest-js@1.16.3)(@supabase/supabase-js@2.46.1)(react@18.3.1)(swr@2.2.5(react@18.3.1))
+      '@supabase/auth-helpers-react':
+        specifier: ^0.5.0
+        version: 0.5.0(@supabase/supabase-js@2.46.1)
       '@supabase/ssr':
         specifier: ^0.5.2
         version: 0.5.2(@supabase/supabase-js@2.46.1)
@@ -941,6 +944,11 @@ packages:
       '@supabase/postgrest-js': ^1.16.3
       react: ^16.11.0 || ^17.0.0 || ^18.0.0
       swr: ^2.2.0
+
+  '@supabase/auth-helpers-react@0.5.0':
+    resolution: {integrity: sha512-5QSaV2CGuhDhd7RlQCoviVEAYsP7XnrFMReOcBazDvVmqSIyjKcDwhLhWvnrxMOq5qjOaA44MHo7wXqDiF0puQ==}
+    peerDependencies:
+      '@supabase/supabase-js': ^2.39.8
 
   '@supabase/auth-js@2.65.1':
     resolution: {integrity: sha512-IA7i2Xq2SWNCNMKxwmPlHafBQda0qtnFr8QnyyBr+KaSxoXXqEzFCnQ1dGTy6bsZjVBgXu++o3qrDypTspaAPw==}
@@ -4163,6 +4171,10 @@ snapshots:
       swr: 2.2.5(react@18.3.1)
     transitivePeerDependencies:
       - '@supabase/supabase-js'
+
+  '@supabase/auth-helpers-react@0.5.0(@supabase/supabase-js@2.46.1)':
+    dependencies:
+      '@supabase/supabase-js': 2.46.1
 
   '@supabase/auth-js@2.65.1':
     dependencies:

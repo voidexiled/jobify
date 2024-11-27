@@ -1,11 +1,12 @@
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import type { Job } from "@/types/common";
+import type { Tables } from "@/types/supabase_public";
 import { getSalaryString } from "@/utils/utils";
 import { motion } from "framer-motion";
 
 type EmployeeJobCardProps = {
-	job: Job;
+	job: Tables<"jobs"> & { applications: Tables<"applications">[] };
 	onClick?: () => void;
 };
 export default function EmployeeJobCard({
@@ -26,7 +27,9 @@ export default function EmployeeJobCard({
 				</CardHeader>
 				<CardContent>
 					<div className="flex justify-between items-center mb-2">
-						<span className="text-sm text-muted-foreground">{job.company}</span>
+						<span className="text-sm text-muted-foreground">
+							{job.applications.length} solicitudes
+						</span>
 						<Badge variant="secondary">{job.location}</Badge>
 					</div>
 					<p className="text-sm text-muted-foreground mb-2">

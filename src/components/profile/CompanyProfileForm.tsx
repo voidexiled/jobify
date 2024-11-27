@@ -9,18 +9,44 @@ import {
 	SelectValue,
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
-import type { CompanyProfile } from "@/hooks/useUserStore";
+import type { Tables } from "@/types/supabase_public";
 import type { ChangeEvent } from "react";
 
 // You may want to move these to a separate file
 const INDUSTRIES = [
-	"Technology",
-	"Healthcare",
-	"Finance",
-	"Education",
-	"Retail",
-	"Manufacturing",
-	"Entertainment",
+	"Tecnologia",
+	"Salud",
+	"Finanzas",
+	"Educación",
+	"Comercio",
+	"Manufactura",
+	"Entretenimiento",
+	"Agricultura",
+	"Construcción",
+	"Transporte",
+	"Energía",
+	"Telecomunicaciones",
+	"Turismo",
+	"Alimentación",
+	"Automotriz",
+];
+
+const BENEFITS = [
+	"Seguro de Salud",
+	"Plan de Retiro",
+	"Trabajo Remoto",
+	"Horarios Flexibles",
+	"Desarrollo Profesional",
+	"Membresía de Gimnasio",
+	"Snacks Gratis",
+	"Vacaciones Pagadas",
+	"Bonos",
+	"Capacitación Continua",
+	"Seguro de Vida",
+	"Transporte",
+	"Guardería",
+	"Descuentos en Productos",
+	"Ambiente de Trabajo Colaborativo",
 ];
 const COMPANY_SIZES = [
 	"1-10",
@@ -30,18 +56,9 @@ const COMPANY_SIZES = [
 	"501-1000",
 	"1000+",
 ];
-const BENEFITS = [
-	"Health Insurance",
-	"401(k)",
-	"Remote Work",
-	"Flexible Hours",
-	"Professional Development",
-	"Gym Membership",
-	"Free Snacks",
-];
 
 interface CompanyProfileFormProps {
-	profile: CompanyProfile;
+	profile: Tables<"company_profiles">;
 	handleInputChange: (
 		e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
 	) => void;
@@ -61,7 +78,7 @@ export function CompanyProfileForm({
 				label="Nombre de la empresa"
 				id="companyName"
 				name="companyName"
-				value={profile.companyName}
+				value={profile.company_name}
 				onChange={handleInputChange}
 				required
 			/>
@@ -69,7 +86,7 @@ export function CompanyProfileForm({
 				<Label htmlFor="industry">Industria</Label>
 				<Select
 					name="industry"
-					value={profile.industry}
+					value={profile.industry || ""}
 					onValueChange={(value) =>
 						handleInputChange({
 							target: { name: "industry", value },
@@ -89,10 +106,10 @@ export function CompanyProfileForm({
 				</Select>
 			</div>
 			<div className="space-y-2">
-				<Label htmlFor="companySize">Tamaño de la empresa</Label>
+				<Label htmlFor="company_size">Tamaño de la empresa</Label>
 				<Select
-					name="companySize"
-					value={profile.companySize}
+					name="company_size"
+					value={profile.company_size?.toString() || ""}
 					onValueChange={(value) =>
 						handleInputChange({
 							target: { name: "companySize", value },
@@ -116,7 +133,7 @@ export function CompanyProfileForm({
 				<Textarea
 					id="description"
 					name="description"
-					value={profile.description}
+					value={profile.description || ""}
 					onChange={handleInputChange}
 					required
 				/>
@@ -125,7 +142,7 @@ export function CompanyProfileForm({
 				label="Sitio web"
 				id="website"
 				name="website"
-				value={profile.website}
+				value={profile.website || ""}
 				onChange={handleInputChange}
 				type="url"
 				required
@@ -134,15 +151,15 @@ export function CompanyProfileForm({
 				label="Ubicación"
 				id="location"
 				name="location"
-				value={profile.location}
+				value={profile.location || ""}
 				onChange={handleInputChange}
 				required
 			/>
 			<InputField
 				label="Año de fundación"
-				id="foundedYear"
-				name="foundedYear"
-				value={profile.foundedYear}
+				id="founded_year"
+				name="founded_year"
+				value={profile.founded_year?.toString() || ""}
 				onChange={handleInputChange}
 				required
 				type="number"
@@ -150,25 +167,9 @@ export function CompanyProfileForm({
 			<ChipSelector
 				label="Beneficios"
 				items={BENEFITS}
-				selectedItems={profile.benefits}
+				selectedItems={profile.benefits || []}
 				onItemSelect={(item: string) => handleAddItem(item, "benefits")}
 				onItemRemove={(item: string) => handleRemoveItem(item, "benefits")}
-			/>
-			<InputField
-				label="LinkedIn"
-				id="linkedin"
-				name="socialMediaLinks.linkedin"
-				value={profile.socialMediaLinks.linkedin || ""}
-				onChange={handleInputChange}
-				type="url"
-			/>
-			<InputField
-				label="Twitter"
-				id="twitter"
-				name="socialMediaLinks.twitter"
-				value={profile.socialMediaLinks.twitter || ""}
-				onChange={handleInputChange}
-				type="url"
 			/>
 		</>
 	);

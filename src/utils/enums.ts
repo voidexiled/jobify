@@ -3,3 +3,8 @@ export enum ApplyButtonState {
   ENABLED = 1,
   APPLIED = 2,
 }
+
+export enum PROFILE_TYPE {
+  EMPLOYEE = "employee",
+  COMPANY = "company",
+}

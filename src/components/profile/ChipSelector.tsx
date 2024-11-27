@@ -28,7 +28,7 @@ export function ChipSelector({
 	);
 
 	return (
-		<div className="space-y-2">
+		<div className="">
 			<Label>{label}</Label>
 			<div className="flex flex-wrap gap-2 mb-2">
 				{selectedItems.map((item) => (
@@ -52,11 +52,11 @@ export function ChipSelector({
 					onChange={(e) => setFilter(e.target.value)}
 				/>
 				{filter && (
-					<div className="absolute z-10 w-full mt-1 bg-background border border-input rounded-md shadow-lg">
+					<div className="absolute z-10 w-full mt-1 bg-background border border-input rounded-md shadow-lg overflow-hidden">
 						{filteredItems.map((item) => (
 							<div
 								key={item}
-								className="px-3 py-2 cursor-pointer hover:bg-accent"
+								className="px-3 py-2 cursor-pointer hover:bg-accent transition-all duration-300 ease-in-out"
 								onClick={() => {
 									onItemSelect(item);
 									setFilter("");

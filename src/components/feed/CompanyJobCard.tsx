@@ -9,23 +9,22 @@ import {
 	ContextMenuShortcut,
 	ContextMenuTrigger,
 } from "@/components/ui/context-menu";
-import { useJobsStore } from "@/hooks/useJobsStore";
 import type { Job } from "@/types/common";
-import { getSalaryString } from "@/utils/utils";
+import type { Tables } from "@/types/supabase_public";
+import { getSalaryString, handlePlural } from "@/utils/utils";
 import { motion } from "framer-motion";
 import { Pencil, Trash } from "lucide-react";
 import Link from "next/link";
 
 type CompanyJobCardProps = {
-	job: Job;
+	job: Tables<"jobs"> & { applications: Tables<"applications">[] };
 };
 
 export function CompanyJobCard({ job }: CompanyJobCardProps) {
-	const { jobs, deleteJob } = useJobsStore();
+	//const { jobs, deleteJob } = useJobsStore();
 
-	const handleEditJob = () => {};
 	const handleDeleteJob = () => {
-		deleteJob(job.id);
+		//deleteJob(job.id);
 	};
 	return (
 		<ContextMenu>
@@ -43,7 +42,13 @@ export function CompanyJobCard({ job }: CompanyJobCardProps) {
 						<CardContent>
 							<div className="flex justify-between items-center mb-2">
 								<span className="text-sm text-muted-foreground">
-									{job.requests.length} candidatos
+									{/* {job.requests.length} candidatos */}
+									{job.applications.length ?? 0}{" "}
+									{handlePlural(
+										job.applications.length ?? 0,
+										"candidato",
+										"candidatos",
+									)}
 								</span>
 								<Badge variant="secondary">{job.location}</Badge>
 							</div>
@@ -71,12 +76,6 @@ export function CompanyJobCard({ job }: CompanyJobCardProps) {
 				</ContextMenu>
 				<ContextMenuSeparator />
 
-				<ContextMenuItem onClick={() => console.log("Editar")}>
-					Editar
-					<ContextMenuShortcut>
-						<Pencil className="h-4 w-4" />
-					</ContextMenuShortcut>
-				</ContextMenuItem>
 				<ContextMenuItem
 					onClick={handleDeleteJob}
 					className="hover:bg-destructive hover:text-destructive-foreground group "

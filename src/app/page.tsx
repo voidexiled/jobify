@@ -1,6 +1,4 @@
-import Image from "next/image";
-import { redirect, useRouter } from "next/navigation";
-import { useEffect } from "react";
+import { redirect } from "next/navigation";
 
 export default async function Home() {
 	redirect("/feed");
