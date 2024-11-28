@@ -27,10 +27,12 @@ export default function JobDetails({
 	job,
 	apply,
 	buttonState,
+	isMobile = false,
 }: {
 	job: (Tables<"jobs"> & JobWithRelations) | null;
 	apply: (job: Tables<"jobs"> & JobWithRelations) => void;
 	buttonState: ApplyButtonState;
+	isMobile?: boolean;
 }) {
 	const divRef = useRef<HTMLDivElement>(null);
 	const [isAtBottom, setIsAtBottom] = useState(false);

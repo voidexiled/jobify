@@ -6,7 +6,16 @@ import { PROFILE_TYPE } from "@/utils/enums";
 import { createClient } from "@/utils/supabase/client";
 import { useSession } from "@supabase/auth-helpers-react";
 import { QueryClient, useQuery } from "@tanstack/react-query";
-import { ArrowLeft, LogOut } from "lucide-react";
+import {
+	ArrowLeft,
+	Home,
+	HomeIcon,
+	LogOut,
+	LogOutIcon,
+	LucideHome,
+	User,
+	UserIcon,
+} from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
@@ -64,10 +73,10 @@ export default function Navbar() {
 							className="text-2xl font-bold flex flex-row text-center items-center gap-3"
 						>
 							<Image src="/logo.png" width={40} height={40} alt="Jobify Logo" />
-							<span>Talent Finder</span>
+							<span className="hidden md:inline-block">Talent Finder</span>
 						</Link>
 					</div>
-					<div className="flex items-center space-x-4">
+					<div className="items-center space-x-4 hidden md:flex">
 						{user?.profile_type && (
 							<Button variant="ghost" asChild>
 								<Link href="/feed">
@@ -83,6 +92,30 @@ export default function Navbar() {
 						<Button variant="ghost" onClick={handleLogout}>
 							<LogOut className="h-4 w-4 mr-2" />
 							Cerrar sesión
+						</Button>
+					</div>
+					<div className="flex items-center justify-end space-x-4 md:hidden">
+						<Link href="/feed">
+							<Button variant="ghost" asChild size="icon" className="p-2">
+								{/* <Link href="/feed"> */}
+								<HomeIcon className="h-4 w-4" />
+								{/* </Link> */}
+							</Button>
+						</Link>
+
+						<Link href="/profile">
+							<Button variant="ghost" asChild size="icon" className="p-2">
+								<UserIcon className="h-4 w-4" />
+							</Button>
+						</Link>
+
+						<Button
+							variant="ghost"
+							onClick={handleLogout}
+							size="icon"
+							className="p-2"
+						>
+							<LogOutIcon className="h-4 w-4" />
 						</Button>
 					</div>
 				</div>

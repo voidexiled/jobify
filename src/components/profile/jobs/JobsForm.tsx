@@ -46,7 +46,7 @@ const extensions = [
 
 		// Character count
 		characterCount: {
-			limit: 20_00,
+			limit: 5_000,
 		},
 		bubble: true,
 		placeholder: {

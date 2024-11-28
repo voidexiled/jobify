@@ -6,7 +6,7 @@ import { PlusCircle } from "lucide-react";
 import Link from "next/link";
 export const CompanyJobCardAdd = () => {
 	return (
-		<Link href="/profile/jobs" className="text-accent underline">
+		<Link href="/profile/jobs" className="text-accent no-underline">
 			<motion.div
 				key="add-new-job-button"
 				whileHover={{ scale: 1.01 }}

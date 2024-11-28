@@ -5,9 +5,21 @@ import { CompanyJobCardAdd } from "@/components/feed/CompanyJobCardAdd";
 import EmployeeJobCard from "@/components/feed/EmployeeJobCard";
 import JobDetails from "@/components/feed/JobDetails";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+	Drawer,
+	DrawerClose,
+	DrawerContent,
+	DrawerDescription,
+	DrawerFooter,
+	DrawerHeader,
+	DrawerTitle,
+	DrawerTrigger,
+} from "@/components/ui/drawer";
 import { Input } from "@/components/ui/input";
 import { useAppliedJobsStore } from "@/hooks/useAppliedJobs";
+import useIsMobile from "@/hooks/useIsMobile";
 import {
 	fetchJobs,
 	fetchJobsAndApplications,
@@ -33,6 +45,7 @@ import { use, useEffect, useState } from "react";
 
 export const FeedList = () => {
 	const supabase = createClient();
+	const isMobile = useIsMobile();
 
 	const userAuth = useSession();
 	const { relationIds, applyForJob, unapplyForJob, deleteRelations } =
@@ -223,7 +236,14 @@ export const FeedList = () => {
 			<main
 				className={cn(
 					"max-w-7xl mx-auto py-6 sm:px-6 lg:px-8 grid grid-rows-1 transition-all relative",
-					selectedJob ? "grid-cols-[1fr_0.6fr] gap-4" : "grid-cols-[1fr_0fr]",
+					"grid-cols-[1fr_0fr]",
+					selectedJob
+						? isMobile
+							? "grid-cols-[1fr_0fr]"
+							: "grid-cols-[1fr_0.6fr] gap-4"
+						: isMobile
+							? "grid-cols-[1fr_0fr]"
+							: "grid-cols-[1fr_0fr]",
 				)}
 			>
 				<div className="px-4 py-6 sm:px-0 transition-all">
@@ -295,17 +315,44 @@ export const FeedList = () => {
 						</h1>
 					)}
 				</div>
-				<div
-					className={cn(
-						"sm:px-0 overflow-hidden z-10 transition-all bg-card text-card-foreground rounded-md h-[500px] sticky top-[10.7rem] left-0",
-					)}
-				>
-					<JobDetails
-						job={selectedJob}
-						apply={applyJob}
-						buttonState={buttonState}
-					/>
-				</div>
+				{selectedJob &&
+					(!isMobile ? (
+						<div
+							className={cn(
+								"sm:px-0 overflow-hidden z-10 transition-all bg-card text-card-foreground rounded-md h-[500px] sticky top-[10.7rem] left-0",
+							)}
+						>
+							<JobDetails
+								job={selectedJob}
+								apply={applyJob}
+								buttonState={buttonState}
+							/>
+						</div>
+					) : (
+						<Drawer open={!!selectedJob} onClose={() => setSelectedJob(null)}>
+							<DrawerContent>
+								<DrawerHeader>
+									<DrawerTitle>
+										{selectedJob.users.company_profiles.company_name}
+									</DrawerTitle>
+									<DrawerDescription className="w-full text-left">
+										<JobDetails
+											isMobile
+											job={selectedJob}
+											apply={applyJob}
+											buttonState={buttonState}
+										/>
+									</DrawerDescription>
+								</DrawerHeader>
+								<DrawerFooter>
+									{/* <Button>Submit</Button> */}
+									<DrawerClose>
+										<Button variant="outline">Cerrar</Button>
+									</DrawerClose>
+								</DrawerFooter>
+							</DrawerContent>
+						</Drawer>
+					))}
 			</main>
 		</div>
 	);

@@ -13,6 +13,7 @@ import {
 import { fetchJobById } from "@/queries/company/jobs";
 import type { Tables } from "@/types/supabase_public";
 import { createClient } from "@/utils/supabase/client";
+import { handlePlural } from "@/utils/utils";
 import { useQuery } from "@tanstack/react-query";
 import {
 	Briefcase,
@@ -54,7 +55,14 @@ export const CandidatesList = ({ id }: { id: Tables<"jobs">["id"] }) => {
 			<div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 space-y-4 md:space-y-0">
 				<div className="flex items-center space-x-2">
 					<Users className="h-5 w-5 text-muted-foreground" />
-					<span className="text-lg font-semibold">23 Candidatos</span>
+					<span className="text-lg font-semibold">
+						{jobData?.applications?.length ?? 0}{" "}
+						{handlePlural(
+							jobData?.applications?.length ?? 0,
+							"candidato",
+							"candidatos",
+						)}
+					</span>
 				</div>
 				<div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-2 w-full md:w-auto">
 					{/* <div className="relative">

@@ -1,3 +1,4 @@
+import MultipleSelect from "@/components/MultipleSelect";
 import { ChipSelector } from "@/components/profile/ChipSelector";
 import { InputField } from "@/components/profile/InputField";
 import { Input } from "@/components/ui/input";
