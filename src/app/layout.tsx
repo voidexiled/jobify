@@ -15,9 +15,9 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-	title: "Jobify - Encuentra tu próximo trabajo",
+	title: "Talent Finder - Encuentra tu próximo trabajo",
 	description:
-		"Jobify es una aplicación web que te permite encontrar tu próximo trabajo.",
+		"Talent Finder es una aplicación web que te permite encontrar tu próximo trabajo.",
 };
 
 export default function RootLayout({
