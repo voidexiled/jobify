@@ -11,6 +11,7 @@ import {
 } from "@/components/ui/context-menu";
 import type { Job } from "@/types/common";
 import type { Tables } from "@/types/supabase_public";
+import { createClient } from "@/utils/supabase/client";
 import { getSalaryString, handlePlural } from "@/utils/utils";
 import { motion } from "framer-motion";
 import { Pencil, Trash } from "lucide-react";
@@ -22,9 +23,19 @@ type CompanyJobCardProps = {
 
 export function CompanyJobCard({ job }: CompanyJobCardProps) {
 	//const { jobs, deleteJob } = useJobsStore();
+	const supabase = createClient();
 
-	const handleDeleteJob = () => {
-		//deleteJob(job.id);
+	const handleDeleteJob = async () => {
+		const { error } = await supabase
+			.from("jobs")
+			.delete()
+			.eq("id", job.id)
+			.single();
+		if (error) {
+			alert(error.message);
+			console.log(error);
+			return;
+		}
 	};
 	return (
 		<ContextMenu>

@@ -17,37 +17,124 @@ const INDUSTRIES = [
 	"Tecnologia",
 	"Salud",
 	"Finanzas",
-	"Educación",
+	"Educacion",
 	"Comercio",
 	"Manufactura",
 	"Entretenimiento",
 	"Agricultura",
-	"Construcción",
+	"Construccion",
 	"Transporte",
-	"Energía",
+	"Energia",
 	"Telecomunicaciones",
 	"Turismo",
-	"Alimentación",
+	"Alimentacion",
 	"Automotriz",
+	"Moda y Textiles",
+	"Logistica",
+	"Medios de Comunicacion",
+	"Arte y Cultura",
+	"Deportes y Recreacion",
+	"Consultoria",
+	"Recursos Humanos",
+	"Bienes Raices",
+	"Servicios Publicos",
+	"Seguridad y Defensa",
+	"Productos Quimicos",
 ];
 
 const BENEFITS = [
+	// Salud y bienestar
 	"Seguro de Salud",
 	"Plan de Retiro",
+	"Seguro Dental",
+	"Seguro de Vida",
+	"Cobertura de Salud Mental",
+	"Acceso a Terapia",
+	"Plan de Bienestar Emocional",
+	"Subsidio para Membresia de Gimnasio",
+	"Descuentos en Actividades Deportivas",
+	"Evaluaciones Medicas Anuales",
+	"Programas de Nutricion",
+
+	// Trabajo remoto y flexibilidad
 	"Trabajo Remoto",
 	"Horarios Flexibles",
-	"Desarrollo Profesional",
-	"Membresía de Gimnasio",
-	"Snacks Gratis",
-	"Vacaciones Pagadas",
+	"Subsidio para Equipo de Trabajo Remoto",
+	"Pago de Internet o Servicios",
+	"Dias Libres Extra",
+	"Viernes Cortos",
+	"Licencias Extendidas por Maternidad/Paternidad",
+	"Dias de Voluntariado",
+	"Permisos Personales Flexibles",
+
+	// Desarrollo y capacitacion
+	"Capacitacion Continua",
+	"Programas de Mentoria",
+	"Reembolso de Cursos",
+	"Certificaciones Pagadas",
+	"Conferencias y Seminarios Pagados",
+	"Plan de Crecimiento Profesional",
+	"Acceso a Bibliotecas Digitales",
+	"Idiomas o Clases de Ingles",
+	"Programas de Rotacion de Puestos",
+	"Presupuesto para Educacion Continua",
+
+	// Bonos e incentivos
 	"Bonos",
-	"Capacitación Continua",
-	"Seguro de Vida",
-	"Transporte",
-	"Guardería",
-	"Descuentos en Productos",
+	"Comisiones",
+	"Bonos por Desempeno",
+	"Bonos de Fin de Ano",
+	"Acciones de la Empresa",
+	"Plan de Participacion en Utilidades",
+	"Premios por Antiguedad",
+	"Incentivos por Referidos",
+	"Descuentos en Productos o Servicios",
+	"Recompensas por Innovacion",
+
+	// Comodidades en la oficina
+	"Snacks Gratis",
+	"Comidas Subsididadas",
+	"Descuentos en Restaurantes Cercanos",
+	"Estacionamiento Gratuito",
+	"Transporte Gratuito",
+	"Espacios de Recreacion",
+	"Oficinas Pet-Friendly",
+	"Zona de Descanso",
+	"Masajes en la Oficina",
 	"Ambiente de Trabajo Colaborativo",
+	"Cafeteria Interna",
+	"Espacios para Lactancia",
+
+	// Beneficios familiares
+	"Guarderia",
+	"Subsidio para Educacion Infantil",
+	"Licencia Parental Extendida",
+	"Beneficios para Dependientes",
+	"Apoyo para Cuidado de Personas Mayores",
+	"Regalos de Cumpleanos y Festivos",
+
+	// Otros beneficios innovadores
+	"Descuentos en Tecnologia",
+	"Acceso a Plataformas de Streaming",
+	"Viajes Corporativos",
+	"Experiencias Exclusivas (eventos, conciertos)",
+	"Creditos en Tiendas Asociadas",
+	"Acceso a Servicios Legales",
+	"Programas de Ahorro para Vacaciones",
+	"Credito para Movilidad (bicicletas, scooters)",
+	"Fondo de Emergencia para Empleados",
+	"Bonos de Relocalizacion",
+	"Viajes Internacionales por Capacitacion",
+	"Clubes de Interes (lectura, juegos, deporte)",
+	"Celebraciones de Cumpleanos",
+	"Reconocimiento Publico por Logros",
+	"Seguro de Viaje Corporativo",
+	"Tarjetas de Regalo",
+	"Reembolso de Gasto en Telefono Movil",
+	"Descuentos en Ropa y Moda",
+	"Acceso Anticipado a Nuevos Productos",
 ];
+
 const COMPANY_SIZES = [
 	"1-10",
 	"11-50",
@@ -76,8 +163,8 @@ export function CompanyProfileForm({
 		<>
 			<InputField
 				label="Nombre de la empresa"
-				id="companyName"
-				name="companyName"
+				id="company_name"
+				name="company_name"
 				value={profile.company_name}
 				onChange={handleInputChange}
 				required

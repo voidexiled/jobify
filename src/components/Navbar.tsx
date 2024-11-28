@@ -64,7 +64,7 @@ export default function Navbar() {
 							className="text-2xl font-bold flex flex-row text-center items-center gap-3"
 						>
 							<Image src="/logo.png" width={40} height={40} alt="Jobify Logo" />
-							<span>Jobify</span>
+							<span>Talent Finder</span>
 						</Link>
 					</div>
 					<div className="flex items-center space-x-4">

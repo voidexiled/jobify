@@ -79,9 +79,7 @@ export const ProfileForm = () => {
 		setIsLoading(true);
 		const supabase = createClient();
 		const user = await supabase.auth.getUser();
-		console.log(user);
-		console.log(userProfileData);
-		console.log(profile);
+
 		if (!user) {
 			return;
 		}
@@ -99,6 +97,7 @@ export const ProfileForm = () => {
 				benefits: profile.benefits,
 			});
 			if (error) {
+				alert(error.message);
 				console.log(error);
 				return;
 			}
@@ -282,7 +281,6 @@ export const ProfileForm = () => {
 								}}
 							/>
 						) : null}
-
 						<ExtendableButton className="w-full" disabled={isLoading}>
 							Guardar perfil
 						</ExtendableButton>
